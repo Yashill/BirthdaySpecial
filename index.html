@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise 💗</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Pacifico&display=swap');
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Baloo 2",system-ui,sans-serif;
+  color:#6f4b63;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(255,255,255,.9) 0 2px,transparent 3px),
+    radial-gradient(circle at 85% 18%,rgba(255,255,255,.8) 0 2px,transparent 3px),
+    linear-gradient(135deg,#fff0f6,#f7efff 52%,#fff8e9);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1.5px);
+  background-size:34px 34px;
+  z-index:-1;
+}
+a{text-decoration:none;color:inherit}
+
+.progress{
+  position:fixed;left:0;top:0;height:5px;width:0%;
+  background:linear-gradient(90deg,#ef8db2,#bb9fea,#ffd77d);
+  z-index:100;
+}
+
+.nav{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  z-index:80;
+  display:flex;gap:8px;align-items:center;
+  padding:8px 10px;border-radius:999px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 30px rgba(150,105,135,.12);
+}
+.nav a,.nav button{
+  border:0;background:transparent;cursor:pointer;
+  font:600 14px "Baloo 2",sans-serif;
+  color:#91677f;padding:7px 13px;border-radius:999px;
+}
+.nav a:hover,.nav button:hover{background:#ffe8f1}
+
+section{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:100px 20px 80px;
+}
+.container{width:min(900px,100%);text-align:center}
+.card{
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:34px;
+  padding:45px 24px;
+  box-shadow:0 22px 70px rgba(166,116,145,.15);
+  backdrop-filter:blur(14px);
+}
+.eyebrow{
+  letter-spacing:3px;text-transform:uppercase;
+  font-size:14px;color:#b589a4;margin:0 0 10px;
+}
+h1,h2{
+  font-family:Pacifico,cursive;font-weight:400;
+  color:#d56e9d;margin:0;
+}
+h1{font-size:clamp(46px,9vw,78px);line-height:1.15}
+h2{font-size:clamp(36px,6vw,54px)}
+.subtitle{
+  max-width:650px;margin:18px auto 0;
+  font-size:19px;line-height:1.65;
+}
+.scroll-hint{
+  margin-top:32px;font-size:15px;color:#a98398;
+  animation:bob 1.7s infinite;
+}
+@keyframes bob{50%{transform:translateY(7px)}}
+
+.stars{display:flex;justify-content:center;gap:12px;font-size:24px;margin:26px 0}
+.stars span{display:inline-block;animation:pulse 1.6s infinite}
+.stars span:nth-child(2){animation-delay:.2s}.stars span:nth-child(3){animation-delay:.4s}
+@keyframes pulse{50%{transform:scale(1.25) rotate(10deg)}}
+
+.type-card{
+  max-width:700px;margin:0 auto;padding:28px;
+  border-radius:28px;background:#fffafc;
+  box-shadow:0 12px 40px rgba(164,113,141,.1);
+}
+#typing{
+  min-height:110px;font-size:22px;line-height:1.7;
+}
+.cursor{display:inline-block;width:2px;height:1em;background:#d66d9c;vertical-align:-2px;animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
+
+.reasons{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-top:28px;
+}
+.reason{
+  border:0;border-radius:24px;padding:24px 16px;
+  background:#fff;cursor:pointer;
+  box-shadow:0 10px 30px rgba(164,113,141,.11);
+  transition:.25s;min-height:150px;
+}
+.reason:hover{transform:translateY(-7px) rotate(-1deg)}
+.reason .emoji{font-size:34px}
+.reason strong{display:block;font-size:18px;margin:8px 0 5px;color:#bd6d93}
+.reason p{margin:0;font-size:14px;color:#916f82}
+.reason.revealed{background:#fff3f8}
+
+.counter{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:24px
+}
+.counter-box{
+  min-width:105px;padding:18px 14px;border-radius:22px;background:#fff;
+  box-shadow:0 10px 25px rgba(164,113,141,.1)
+}
+.counter-box b{display:block;font-size:28px;color:#d66d9c}
+.counter-box span{font-size:13px;color:#9e7a8d}
+
+.memory{
+  margin-top:30px;padding:24px;border-radius:26px;
+  background:linear-gradient(135deg,#fff8fb,#fffdf4);
+}
+.memory button,.primary{
+  border:0;cursor:pointer;font:700 16px "Baloo 2",sans-serif;
+  color:#fff;background:#d86e9d;padding:13px 24px;border-radius:999px;
+  box-shadow:0 10px 24px rgba(216,110,157,.25);
+  transition:.2s;
+}
+.memory button:hover,.primary:hover{transform:translateY(-2px)}
+#memoryText{margin:16px auto 0;max-width:580px;font-size:18px;line-height:1.6;min-height:32px}
+
+.gift-area{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gift{
+  width:190px;height:160px;position:relative;cursor:pointer;
+  filter:drop-shadow(0 16px 16px rgba(120,80,100,.18));
+  transition:.25s;
+}
+.gift:hover{transform:translateY(-8px) rotate(-2deg)}
+.box{position:absolute;left:15px;bottom:0;width:160px;height:115px;border-radius:10px 10px 18px 18px;background:linear-gradient(135deg,#ff9fc2,#f478a8)}
+.box:after{content:"";position:absolute;left:65px;top:0;width:30px;height:115px;background:#ffd66d}
+.lid{position:absolute;left:7px;top:30px;width:176px;height:38px;border-radius:10px;background:#ff8fb7;z-index:3}
+.lid:after{content:"";position:absolute;left:73px;top:0;width:30px;height:38px;background:#ffd66d}
+.ribbon-left,.ribbon-right{
+  position:absolute;top:0;width:58px;height:34px;
+  border:10px solid #ffd66d;border-radius:50%;z-index:4;
+}
+.ribbon-left{left:48px;transform:rotate(28deg)}
+.ribbon-right{left:88px;transform:rotate(-28deg)}
+.open-btn{
+  margin-top:24px;border:0;padding:13px 28px;border-radius:999px;
+  background:#d96f9d;color:white;font:700 17px "Baloo 2",sans-serif;
+  cursor:pointer;box-shadow:0 9px 20px rgba(217,111,157,.25)
+}
+
+/* Video Container Styling */
+.gift-video {
+  display: none;
+  max-width: 100%;
+  width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(166,116,145,.3);
+  animation: pop .7s cubic-bezier(.2,1.5,.4,1);
+}
+.gift-video.show {
+  display: block;
+}
+
+@keyframes pop{from{transform:scale(.4) translateY(40px);opacity:0}to{transform:scale(1);opacity:1}}
+
+.message{display:none;margin-top:18px;font-family:Pacifico,cursive;color:#d66d9c;font-size:29px}
+.message.show{display:block;animation:fade .8s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+
+#sparkles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:100}
+.spark{position:absolute;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.1}}
+
+.floating-heart{
+  position:fixed;bottom:-30px;pointer-events:none;opacity:.7;z-index:5;
+  animation:floatUp linear forwards
+}
+@keyframes floatUp{
+  from{transform:translateY(0) scale(.8);opacity:.1}
+  20%{opacity:.8}
+  to{transform:translateY(-110vh) translateX(var(--drift)) scale(1.2);opacity:0}
+}
+
+.confetti-btn{margin-top:18px}
+.footer{padding:35px 20px 55px;text-align:center;color:#a88498;font-size:14px}
+
+@media(max-width:700px){
+  .nav{top:10px}
+  .nav a,.nav button{padding:6px 9px;font-size:12px}
+  .reasons{grid-template-columns:1fr}
+  .card{padding:34px 17px}
+  .subtitle{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <a href="#start">♡ Home</a>
+  <a href="#little">♡ Little Things</a>
+  <a href="#surprise">♡ Surprise</a>
+  <button id="musicBtn" title="Toggle gentle music">♪</button>
+</nav>
+
+<section id="start">
+  <div class="container">
+    <div class="card">
+      <p class="eyebrow">a tiny website made just for you</p>
+      <h1>Happy Birthday, Cutie! 🎀</h1>
+      <div class="stars"><span>✦</span><span>♡</span><span>✦</span></div>
+      <p class="subtitle">
+        Today is the most special day even mero lagi 
+        So I made this tiny suprise just for mero fav sese. 💗
+      </p>
+      <p class="scroll-hint">Scroll down… Ajhai dherai kura baki xa. ↓</p>
+    </div>
+  </div>
+</section>
+
+<section id="little">
+  <div class="container">
+    <div class="card">
+      <p class="eyebrow">a little message</p>
+      <h2>Things I hope you remember ✨</h2>
+      <div class="type-card">
+        <div id="typing"></div>
+      </div>
+
+      <div class="reasons">
+        <button class="reason" onclick="revealReason(this,'your smile makes ordinary days feel special 💕')">
+          <div class="emoji">🌷</div><strong>Tap me</strong><p>there is a secret here</p>
+        </button>
+        <button class="reason" onclick="revealReason(this,'you deserve every form of happiness in this world and ill try my best to be one of that part ✨')">
+          <div class="emoji">🧸</div><strong>Tap me</strong><p>another tiny secret</p>
+        </button>
+        <button class="reason" onclick="revealReason(this,'being you is already more than enough 🌸')">
+          <div class="emoji">🎀</div><strong>Tap me</strong><p>one more secret</p>
+        </button>
+      </div>
+
+      <div class="counter">
+        <div class="counter-box"><b id="smileCount">0</b><span>imaginary smiles</span></div>
+        <div class="counter-box"><b id="heartCount">0</b><span>tiny hearts</span></div>
+        <div class="counter-box"><b>∞</b><span>good wishes</span></div>
+      </div>
+
+      <div class="memory">
+        <button onclick="showMemory()">Click me thrice for 3 extra messages. 💌</button>
+        <p id="memoryText"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="surprise">
+  <div class="container">
+    <div class="card">
+      <p class="eyebrow">you made it to the end</p>
+      <h2>Okay… THIS is the final surprise 🎁</h2>
+      <p class="subtitle">Just a little present for u. Open it muwah. 👀</p>
+
+      <div class="gift-area">
+        <div id="gift" class="gift" aria-label="Wrapped birthday gift" onclick="openGift()">
+          <div class="ribbon-left"></div>
+          <div class="ribbon-right"></div>
+          <div class="lid"></div>
+          <div class="box"></div>
+        </div>
+
+        <video id="giftVideo" class="gift-video" controls playsinline>
+          <source src="media/HappyBirthday.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <audio id="birthdaySong" src="media/HappyBirthdaySong.mp3" preload="auto" loop></audio>
+
+        <button id="openBtn" class="open-btn" onclick="openGift()">Open your gift 🎁</button>
+        <div id="message" class="message">A video for the sweetest person 💕</div>
+
+        <button id="confettiBtn" class="primary confetti-btn" onclick="makeSparkles()" style="display:none">
+          More sparkles ✨
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="sparkles"></div>
+<footer class="footer">made with too much love rah ali badi nai cuteness just like you, yourself.<br> 8/17/2026 - 8/21/2026 <br>Made proudly for ugen tso mathema maharjan by yashil maharjan mathema and youtube's help ♡</footer>
+
+<script>
+const progress=document.getElementById("progress");
+window.addEventListener("scroll",()=>{
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(window.scrollY/max*100)+"%";
+});
+
+const text="I hope this new year of your life brings you meaningful days with me and all of ur loved once. Hope everything that's happening settle down and I wish for all the negativity to get away from you. And whenever life gets a little messy… I hope you remember just how special you are cuz u are. Bujhyou ni ? 💗";
+let i=0;
+function typeText(){
+  if(i<=text.length){
+    document.getElementById("typing").innerHTML=text.slice(0,i)+'<span class="cursor"></span>';
+    i++; setTimeout(typeText,34);
+  }
+}
+typeText();
+
+function revealReason(btn,msg){
+  btn.classList.add("revealed");
+  btn.querySelector("p").textContent=msg;
+  btn.querySelector("strong").textContent="Aha! 💗";
+  increment("smileCount");
+  heartBurst(8);
+}
+function increment(id){
+  const el=document.getElementById(id);
+  el.textContent=Number(el.textContent)+1;
+}
+function showMemory(){
+  const lines=[
+    "P.S. Yo chahi the cutest person ko birthday vako vayera matrai yetro efforts lagayera baneko webpage ho hai. 🎀",
+    "Final tiny reminder: i shall make u some sekuwa hehe . 🌷",
+    "Emergency reminder: you are most special person in this whole universe and we all appreciate u very much. And today u get to enjoy urself to the fullest. 🍰"
+  ];
+  const box=document.getElementById("memoryText");
+  box.textContent=lines[Math.floor(Math.random()*lines.length)];
+  increment("heartCount");
+  heartBurst(12);
+}
+
+function heartBurst(n){
+  for(let j=0;j<n;j++){
+    const h=document.createElement("div");
+    h.className="floating-heart";
+    h.textContent=["♡","♥","✦","✨"][Math.floor(Math.random()*4)];
+    h.style.left=(20+Math.random()*60)+"vw";
+    h.style.setProperty("--drift",(Math.random()*160-80)+"px");
+    h.style.animationDuration=(3+Math.random()*2)+"s";
+    h.style.fontSize=(14+Math.random()*18)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5200);
+  }
+}
+
+function makeSparkles(){
+  const symbols=["✦","✧","✨","♡","★","·"];
+  const wrap=document.getElementById("sparkles");
+  for(let j=0;j<90;j++){
+    const s=document.createElement("span");
+    s.className="spark";
+    s.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(2.5+Math.random()*3.5)+"s";
+    s.style.animationDelay=Math.random()*1.2+"s";
+    s.style.fontSize=(12+Math.random()*18)+"px";
+    wrap.appendChild(s);
+    setTimeout(()=>s.remove(),6500);
+  }
+}
+
+function openGift(){
+  const video = document.getElementById("giftVideo");
+  const song = document.getElementById("birthdaySong");
+
+  document.getElementById("gift").style.display="none";
+  document.getElementById("openBtn").style.display="none";
+
+  // Reveal and play video
+  video.classList.add("show");
+  video.play().catch(e => console.log("Video play error:", e));
+
+  // Play real audio track
+  song.play().catch(e => console.log("Audio play error:", e));
+  document.getElementById("musicBtn").textContent = "♫";
+
+  document.getElementById("message").classList.add("show");
+  document.getElementById("confettiBtn").style.display="inline-block";
+  makeSparkles();
+  heartBurst(18);
+}
+
+// Toggle Real Music Function
+function toggleMusic(){
+  const song = document.getElementById("birthdaySong");
+  const btn = document.getElementById("musicBtn");
+
+  if(song.paused){
+    song.play();
+    btn.textContent = "♫";
+  } else {
+    song.pause();
+    btn.textContent = "♪";
+  }
+}
+document.getElementById("musicBtn").addEventListener("click", toggleMusic);
+
+setInterval(()=>{ if(Math.random()<0.55) heartBurst(1); },1800);
+</script>
+</body>
+</html>
